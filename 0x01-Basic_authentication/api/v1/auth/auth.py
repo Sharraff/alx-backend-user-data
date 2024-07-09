@@ -6,8 +6,10 @@ from flask import request
 from typing import TypeVar, List
 User = TypeVar('User')
 
+
 class Auth:
     """
+    class: Auth
     """
     def __init__(self) -> None:
         pass
@@ -31,7 +33,6 @@ class Auth:
             return None
         return request.headers.get("Authorization")
 
-    
     def current_user(self, request=None) -> TypeVar:
         """
         """

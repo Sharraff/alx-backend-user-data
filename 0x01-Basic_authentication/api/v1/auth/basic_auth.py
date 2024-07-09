@@ -4,9 +4,11 @@ BasicAuth class
 """
 from api.v1.auth.auth import Auth
 from typing import TypeVar, List
-# from models.user import User
+from models.user import User
 import base64
 import binascii
+
+
 
 class BasicAuth(Auth):
     """
@@ -26,7 +28,7 @@ class BasicAuth(Auth):
             return None
 
         return authorization_header[6:]
-    
+
     def decode_base64_authorization_header(self, base64_authorization_header: str) -> str:
         """
         returns the decoded value of a Base64
