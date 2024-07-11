@@ -25,6 +25,7 @@ elif os.getenv('AUTH_TYPE') == "basic_auth":
 elif os.getenv('AUTH_TYPE') == "session_auth":
     auth = SessionAuth()
 
+
 @app.errorhandler(404)
 def not_found(error) -> str:
     """ Not found handler
@@ -63,7 +64,6 @@ def before_request():
         if not auth.current_user(request):
             abort(403)
         request.current_user = auth.current_user(request)
-        
 
 
 if __name__ == "__main__":
