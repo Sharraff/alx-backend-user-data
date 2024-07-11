@@ -10,6 +10,7 @@ from models.user import User
 
 class SessionAuth(Auth):
     """
+    class session
     """
     user_id_by_session_id = {}
 
