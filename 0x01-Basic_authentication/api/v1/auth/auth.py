@@ -2,6 +2,7 @@
 """
 Auth class
 """
+from tabnanny import check
 from flask import request
 from typing import List, TypeVar
 User = TypeVar('User')
@@ -16,15 +17,24 @@ class Auth:
         """
         this function returns False - path and exclude_paths
         """
-        return False
+        check = path
+        if path is None or excluded_paths is None or len(excluded_paths) == 0:
+            return True
+        if path[-1] != "/":
+            check += "/"
+        if check in excluded_paths or path in excluded_paths:
+            return False
+        return True
 
     def authorization_header(self, request=None) -> str:
         """
         returns None - request
         """
-        return None
+        if request is None:
+            return None
+        return request.headers.get("Authorization")
 
-    def current_user(self, request=None) -> TypeVar('User'):
+    def current_user(self, request=None) -> User:
         """
         returns None - request
         """
