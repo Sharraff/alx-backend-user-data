@@ -9,7 +9,7 @@ from api.v1.auth.basic_auth import BasicAuth
 from api.v1.auth.session_auth import SessionAuth
 from flask import Flask, jsonify, abort, request
 from flask_cors import (CORS, cross_origin)
-from os import getenv 
+from os import getenv
 
 
 app = Flask(__name__)
@@ -23,6 +23,7 @@ elif getenv("AUTH_TYPE") == "basic_auth":
     auth = BasicAuth()
 elif getenv("AUTH_TYPE") == "session_auth":
     auth = SessionAuth()
+
 
 @app.errorhandler(404)
 def not_found(error) -> str:
@@ -60,8 +61,8 @@ def before_request():
     if auth and auth.require_auth(request.path, authorized_list):
         if not auth.authorization_header(request):
             abort(401)
-        if (auth.authorization_header(request) and
-            not auth.session_cookie(request)):
+        if (auth.authorization_header(request) and not
+                auth.session_cookie(request)):
             abort(401)
         request.current_user = auth.current_user(request)
         if not auth.current_user(request):
